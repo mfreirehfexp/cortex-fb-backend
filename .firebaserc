@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "hfexp-cortex-fb",
+    "test1": "hfexp-cortex-test1",
+    "test-data": "hfexp-cortex-data"
+  }
+}
