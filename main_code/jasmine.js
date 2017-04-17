@@ -1,0 +1,11 @@
+/**
+ * Created by martin.freire on 15/4/2017.
+ */
+var Jasmine = require('jasmine');
+var jasmine = new Jasmine();
+
+jasmine.loadConfigFile('spec/support/jasmine.json');
+jasmine.configureDefaultReporter({
+  showColors: false
+});
+jasmine.execute();

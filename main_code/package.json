@@ -1,0 +1,25 @@
+{
+  "name": "fft-main-code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node spec/build/run-test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-jasmine": "^2.4.2",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-typescript": "^3.1.1",
+    "jasmine": "^2.5.3",
+    "typescript": "^2.0.6"
+  },
+  "dependencies": {
+    "@types/es6-promise": "0.0.32",
+    "@types/jasmine": "^2.5.38"
+  }
+}

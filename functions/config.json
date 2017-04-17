@@ -1,0 +1,14 @@
+{
+  "firebase": {
+	"apiKey": "AIzaSyCEtl7N6aohJavVtoILUC48uQ3UeRn_YXw",
+    "authDomain": "hfexp-cortex-data.firebaseapp.com",
+    "databaseURL": "https://hfexp-cortex-data.firebaseio.com",
+    "projectId": "hfexp-cortex-data",
+    "storageBucket": "hfexp-cortex-data.appspot.com",
+    "messagingSenderId": "666229080018"
+  },
+  "config": {
+    "token": "SDIJKDBKNKSD2DFBNKJN",
+    "project": "f3"
+  }
+}

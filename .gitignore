@@ -36,6 +36,10 @@ build/Release
 
 # Dependency directories
 .idea/
+functions/node_modules/
+functions/dist/
+main_code/node_modules/
+main_code/spec/build/
 node_modules/
 jspm_packages/
 
