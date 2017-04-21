@@ -1,0 +1,20 @@
+export const DB_TABLE_PROPS = {
+  numerator: "numerator",
+  list: "list",
+  list_childs: "list-detalle",
+  list_childs_keys: "list-detalle-keys",
+  childs: "detalle",
+  inbox: "inbox",
+  unique_keys: "unique_keys",
+  deleted: "deleted",
+  deleted_childs: "deleted_childs",
+  deleted_childs_keys: "deleted_childs_keys",
+  deleted_unique_keys: "deleted_unique_keys",
+  inbox_processed: "inbox_processed",
+  inbox_rejected: "inbox_rejected",
+  log_events: "log_events",
+  views: "views",
+  item_create_timestamp: "create_timestamp",
+  item_update_timestamp: "update_timestamp",
+  item_last_attempt_timestamp: "last_attempt_timestamp"
+};

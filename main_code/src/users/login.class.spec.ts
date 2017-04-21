@@ -7,7 +7,7 @@ import {Login} from './login.class';
 
 
 describe("A suite is just a getFunction", function() {
-  var a;
+  let a;
   let login;
 
   beforeAll(()=>{
@@ -16,7 +16,6 @@ describe("A suite is just a getFunction", function() {
       adminUsers: []
     });
   })
-
 
   it("and so is a spec", function() {
     a = true;

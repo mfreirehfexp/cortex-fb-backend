@@ -1,6 +1,6 @@
 import { baseEventClass } from './fb-events/baseEventClass';
 import { FbFunctionBuilder } from './fb-events/FbFunctionBuilder';
-import { HelloWorldFunction } from './functions/hello-world-function';
+import { MaterialesOrdenDeCompra } from './functions';
 import { HelloWorldHttpFunction } from './functions/hello-world-http-function';
 
 /**
@@ -19,19 +19,18 @@ import { HelloWorldHttpFunction } from './functions/hello-world-http-function';
  */
 export class FirebaseCloudFunctions {
   database = null;
-  functions = ['helloWorldSimple','helloWorldClass','helloWorldHttpClass'];
+  functions = ['MatOrdenCompraTable','httpGus'];
 
   // Function "helloWorldSimple"
-  helloWorldSimple:baseEventClass =  new FbFunctionBuilder( 'onWrite', '/test/helloWorld/{uid}', ( event )=>{
-      console.log("Hello World!");
-      console.info("param:",event.params.uid);
-      console.info("val:",event.data.val());
-      return;
+  // helloWorldSimple:baseEventClass =  new FbFunctionBuilder( 'onWrite', '/test/helloWorld/{uid}', ( event )=>{
+  //     console.log("Hello World!"); return;
+  //   });
+
+  httpGus:baseEventClass =  new FbFunctionBuilder( 'http', null, ( request, response )=>{
+      response.status(200).send("Hello " + JSON.stringify(request.body)); return;
     });
 
-  // Function "helloWorldClass"
-  helloWorldClass:baseEventClass = new HelloWorldFunction();
+  // Function
+  MatOrdenCompraTable:baseEventClass = new MaterialesOrdenDeCompra();
 
-  // Function "helloWorldHttpClass"
-  helloWorldHttpClass:baseEventClass = new HelloWorldHttpFunction();
 }
