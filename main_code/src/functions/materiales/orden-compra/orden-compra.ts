@@ -73,7 +73,7 @@ export class OrdenCompra extends onDatabaseWrite{
         // CASE ALLOWED
         return tableRef.child(DB.list).child(value.fbKey).set(value)
             .then(()=>{
-              return this.setDetalles('save',tableRef,childs);
+              return this.setDetalles('save',tableRef,value.fbKey,childs, keys);
             })
             .then(()=>{
                 return this._getNextNumerator(tableRef)
@@ -126,7 +126,7 @@ export class OrdenCompra extends onDatabaseWrite{
             return Promise.all([
               tableRef.child(DB.list).child(value.fbKey).set(value),
               this.setInbox('processed',tableRef,event.data.key, msg),
-              this.setDetalles('update',tableRef,childs),
+              this.setDetalles('update',tableRef,value.fbKey,childs,keys),
               this.setTimeStamItem("update",tableRef,value,event.timestamp),
             ]);
           });
@@ -172,7 +172,7 @@ export class OrdenCompra extends onDatabaseWrite{
               tableRef.child(DB.unique_keys).child(unique_id_to_save).set(null),
 
               this.setInbox('processed',tableRef,event.data.key, msg),
-              this.setDetalles("remove", tableRef,childs),
+              this.setDetalles("remove", tableRef,value.fbKey,childs, keys),
               this.setTimeStamItem("remove", tableRef,value,event.timestamp),
             ]);
           });
@@ -181,24 +181,22 @@ export class OrdenCompra extends onDatabaseWrite{
     });
   }
 
-  setDetalles(type: 'save'|'update'|'remove', tableRef, detail:[{fbKey:string, parentFbKey:string}]){
+  setDetalles(type: 'save'|'update'|'remove', tableRef, valueFbKey: string, detail:{[key:string]:{fbKey:string, parentFbKey:string}}, keys){
     let arrP = [];
-    detail.forEach((item,index)=>{
-      if( type == 'save'){
-        arrP.push(tableRef.child(DB.list_childs).child(item.fbKey).set(item));
-        arrP.push(tableRef.child(DB.list_childs_keys).child(item.parentFbKey).child(item.fbKey).set(true));
-      }
-      else if( type == 'update'){
-        arrP.push(tableRef.child(DB.list_childs).child(item.fbKey).update(item));
-        arrP.push(tableRef.child(DB.list_childs_keys).child(item.parentFbKey).child(item.fbKey).set(true));
-      }
-      else if( type == 'remove'){
-        arrP.push(tableRef.child(DB.list_childs).child(item.fbKey).set(null));
-        arrP.push(tableRef.child(DB.list_childs_keys).child(item.parentFbKey).child(item.fbKey).set(null));
-        arrP.push(tableRef.child(DB.deleted_childs).child(item.fbKey).set(item));
-        arrP.push(tableRef.child(DB.deleted_childs_keys).child(item.parentFbKey).child(item.fbKey).set(true));
-      }
-    });
+    if( type == 'save'){
+      arrP.push(tableRef.child(DB.list_childs).child(valueFbKey).set(detail));
+      arrP.push(tableRef.child(DB.list_childs_keys).child(valueFbKey).set(keys));
+    }
+    else if( type == 'update'){
+      arrP.push(tableRef.child(DB.list_childs).child(valueFbKey).set(detail));
+      arrP.push(tableRef.child(DB.list_childs_keys).child(valueFbKey).set(keys));
+    }
+    else if( type == 'remove'){
+      arrP.push(tableRef.child(DB.list_childs).child(valueFbKey).set(null));
+      arrP.push(tableRef.child(DB.list_childs_keys).child(valueFbKey).set(null));
+      arrP.push(tableRef.child(DB.deleted_childs).child(valueFbKey).set(detail));
+      arrP.push(tableRef.child(DB.deleted_childs_keys).child(valueFbKey).set(keys));
+    }
     return Promise.all(arrP);
   }
 
@@ -252,14 +250,16 @@ export class OrdenCompra extends onDatabaseWrite{
 
     for( let key in value[detail_field] ){
       // Mode 1
-      // let detLine = value[detail_field][key];
-      // detail[detLine.fbKey] = Object.assign(detLine);
-
-      // Module 2
       let detLine = value[detail_field][key];
       detLine.parentFbKey = value.fbKey;
       keys[detLine.fbKey] = true;
-      detail.push( Object.assign(detLine) );
+      detail[detLine.fbKey] = Object.assign(detLine);
+
+      // Module 2
+      // let detLine = value[detail_field][key];
+      // detLine.parentFbKey = value.fbKey;
+      // keys[detLine.fbKey] = true;
+      // detail.push( Object.assign(detLine) );
     }
 
     callback({

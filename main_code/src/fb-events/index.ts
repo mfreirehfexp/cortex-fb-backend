@@ -4,3 +4,4 @@ export { onCreateUser }                 from './onCreateUser';
 export { onDeleteUser }                 from './onDeleteUser';
 export { onDatabaseWrite }              from './onDatabaseWrite';
 export { onHttp }                       from './onHttp';
+export { onPublish }                    from './onPublish';

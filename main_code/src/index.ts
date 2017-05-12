@@ -1,7 +1,7 @@
 import { baseEventClass } from './fb-events/baseEventClass';
 import { FbFunctionBuilder } from './fb-events/FbFunctionBuilder';
-import { MaterialesOrdenDeCompra } from './functions';
-import { HelloWorldHttpFunction } from './functions/hello-world-http-function';
+import { MaterialesOrdenDeCompra,MaterialesOrdenCompraSaved } from './functions';
+// import { HelloWorldHttpFunction } from './functions/hello-world-http-function';
 
 /**
  * FirebaseCloudFunctions
@@ -19,18 +19,16 @@ import { HelloWorldHttpFunction } from './functions/hello-world-http-function';
  */
 export class FirebaseCloudFunctions {
   database = null;
-  functions = ['MatOrdenCompraTable','httpGus'];
+  functions = ['MatOrdenCompraTable','MatOrdenCompraSaved'];
 
   // Function "helloWorldSimple"
   // helloWorldSimple:baseEventClass =  new FbFunctionBuilder( 'onWrite', '/test/helloWorld/{uid}', ( event )=>{
   //     console.log("Hello World!"); return;
   //   });
 
-  httpGus:baseEventClass =  new FbFunctionBuilder( 'http', null, ( request, response )=>{
-      response.status(200).send("Hello " + JSON.stringify(request.body)); return;
-    });
-
   // Function
   MatOrdenCompraTable:baseEventClass = new MaterialesOrdenDeCompra();
+  // Function
+  MatOrdenCompraSaved:baseEventClass = new MaterialesOrdenCompraSaved();
 
 }

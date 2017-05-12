@@ -30,6 +30,8 @@ app_functions.functions.forEach((funcName,index)=>{
       break;
     case "onDeleteUser":
       exports[funcName] = functions.auth.user().onDelete(funct.callbackFunction);
+    case "onPublish":
+      exports[funcName] = functions.pubsub.topic(funct.path).onPublish(funct.callbackFunction);
       break;
     default: break;
   }

@@ -1,5 +1,5 @@
 
-export type FbEventMode = "onWrite" | "http" | "onCreateUser" | "onDeleteUser";
+export type FbEventMode = "onWrite" | "http" | "onCreateUser" | "onDeleteUser" | "onPublish";
 
 export abstract class baseEventClass{
   type: FbEventMode;

@@ -5,8 +5,9 @@ import {
 } from '../dependencies';
 
 // Firebase Path Event
-const TOPIC = 'worker-sql-v01'; // 'projects/hfexp-cortex-fb/topics/worker-sql-v01';
+const TOPIC = 'worker-sql-v02'; // 'projects/hfexp-cortex-fb/topics/worker-sql-v01';
 // const TABLE_PATH = BASE_PATH + '/orden-compra';
+
 
 
 export class OrdenCompraSaved extends onPublish{
